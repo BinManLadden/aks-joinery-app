@@ -1,0 +1,20 @@
+{
+  "id": "./",
+  "name": "AKS Joinery",
+  "short_name": "AKS Joinery",
+  "description": "AKS Joinery site, plot, job order and inspection management",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f5f7f6",
+  "theme_color": "#176b45",
+  "icons": [
+    {
+      "src": "./icons/aks-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
