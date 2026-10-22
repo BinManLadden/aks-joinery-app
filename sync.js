@@ -159,12 +159,13 @@
         !Array.isArray(incoming.priceLists) || !Array.isArray(incoming.orders)) {
       throw new Error("The cloud copy is not a valid AKS app backup.");
     }
-    window.aksSetDb(incoming);
+    const migrated = window.aksSetDb(incoming);
     cloudRevision = Number(row.revision);
     syncReady = true;
     localDirty = false;
     saveSyncState();
     setStatus("Shared data downloaded. This device will check for updates while it is open.");
+    if (migrated) queueCloudSave();
   }
 
   async function saveCloudConnection() {
@@ -419,6 +420,7 @@
       urlInput.value = config.url || "";
       keyInput.value = config.key || "";
       getClient().then(function () {
+        if (window.aksNeedsSyncMigration && syncReady) queueCloudSave();
         if (!user) setStatus("Cloud connection saved on this device. Sign in with the shared team account.");
       }).catch(function () {
         setStatus("Cloud sync needs an internet connection and a valid Supabase setup.", true);
