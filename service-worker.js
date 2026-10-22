@@ -1,5 +1,5 @@
-const CACHE_NAME = "aks-joinery-cloud-sync-v2";
-const APP_SHELL = ["./", "./index.html", "./sync.js", "./manifest.webmanifest", "./icons/aks-icon.svg"];
+const CACHE_NAME = "aks-joinery-cloud-sync-v3";
+const APP_SHELL = ["./", "./index.html", "./sync.js", "./manifest.webmanifest", "./icons/aks-icon.svg", "./icons/vistry-group.svg"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));

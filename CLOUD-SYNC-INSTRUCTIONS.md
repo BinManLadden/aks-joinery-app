@@ -12,7 +12,7 @@ The database table and its row-level security rules are set up by `cloud-setup.s
 
 1. Extract `AKS-Joinery-Cloud-Sync-Setup-Updated.zip` on your computer.
 2. In the existing `aks-joinery-app` repository, select **Add file** → **Upload files**.
-3. Upload these files from the extracted folder to the repository's top level: `index.html`, `sync.js`, `service-worker.js`, `manifest.webmanifest`, and `CLOUD-SYNC-INSTRUCTIONS.md`. Keep `index.html` directly in the repository root. The existing `icons/aks-icon.svg` can stay where it is.
+3. Upload these files from the extracted folder to the repository's top level: `index.html`, `sync.js`, `service-worker.js`, `manifest.webmanifest`, and `CLOUD-SYNC-INSTRUCTIONS.md`. Keep `index.html` directly in the repository root. Upload the `icons/vistry-group.svg` logo inside the existing `icons` folder; keep `icons/aks-icon.svg` there too.
 4. Commit the changes to `main` and wait for the green **pages build and deployment** run.
 
 Do not upload `AKS-Holden-Fold-import-backup.json` to the public repository. It contains plot and price data.
