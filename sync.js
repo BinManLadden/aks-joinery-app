@@ -255,7 +255,7 @@
       const prompt = isOverwrite
         ? "Replace the shared cloud data with this device's data? Everyone using the team account will see the replacement."
         : "Create the shared cloud copy using the data on this device?";
-      if (!window.confirm(prompt)) return;
+      if (!(await window.confirm(prompt))) return;
       const nextRevision = row ? Number(row.revision) + 1 : 1;
       const payload = {
         user_id: auth.user.id,
@@ -303,7 +303,7 @@
         setStatus("There is no cloud copy yet. Use Upload on the first device to create it.");
         return;
       }
-      if (!window.confirm("Replace the data on this device with the shared cloud copy? Export a backup first if you need to keep this device's current data.")) return;
+      if (!(await window.confirm("Replace the data on this device with the shared cloud copy? Export a backup first if you need to keep this device's current data."))) return;
       applyCloudRow(row);
     } catch (err) {
       setStatus(err.message || "Could not download the shared data.", true);
@@ -324,7 +324,7 @@
       }
       const remoteRevision = Number(row.revision);
       if (!syncReady || cloudRevision === null) {
-        if (!window.confirm("A shared cloud copy exists. Download it and replace the data on this device? Choose Cancel to keep this device unchanged; use Upload only if you intend to replace the shared copy.")) return;
+        if (!(await window.confirm("A shared cloud copy exists. Download it and replace the data on this device? Choose Cancel to keep this device unchanged; use Upload only if you intend to replace the shared copy."))) return;
         applyCloudRow(row);
       } else if (remoteRevision > cloudRevision) {
         if (localDirty) {
