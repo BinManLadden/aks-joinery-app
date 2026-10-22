@@ -14,6 +14,15 @@
 @media print{body{background:white}.top,.foot{display:none!important}main{padding:0}.view{display:none!important}#printArea{display:block!important}#printArea .printpage{width:100%;padding:0;color:#111}#printArea h1{font-size:20px;margin:0 0 6px}#printArea h2{font-size:15px;margin:16px 0 7px;border-bottom:1px solid #777;padding-bottom:4px}#printArea .printmeta{display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:12px;margin:12px 0}#printArea table{font-size:11px}#printArea th,#printArea td{white-space:normal;padding:6px;border:1px solid #aaa}#printArea .signatures{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:38px;font-size:11px}#printArea .sigline{border-top:1px solid #555;padding-top:5px;margin-top:25px}@page{size:A4;margin:14mm}}
 @media print{#printArea .inspection-sheet{border:0;border-radius:0;box-shadow:none;max-width:none;margin:0;padding:0;min-height:260mm}#printArea .inspection-top{grid-template-columns:1fr 160px}#printArea .inspection-brand-logo{width:150px;margin-top:15px}#printArea .inspection-title{font-size:18px;margin:0 0 16px}#printArea .inspection-line{font-size:12px;margin:8px 0}#printArea .inspection-stage{font-size:14px;margin:22px 0 9px}#printArea .inspection-checks{gap:9px;font-size:11px}#printArea .inspection-signatures{margin-top:58px;font-size:10px}#printArea .inspection-blank{min-height:100mm}#printArea .inspection-preview-actions{display:none!important}}
 </style>
+<style>
+.app-alert{width:min(92vw,420px);border:0;border-radius:16px;padding:0;color:var(--ink);box-shadow:0 12px 45px #0005}
+.app-alert::backdrop{background:#0007;backdrop-filter:blur(2px)}
+.app-alert-box{padding:22px}
+.app-alert h2{margin:0 0 9px;font-size:19px;color:var(--green)}
+.app-alert p{margin:0 0 20px;white-space:pre-wrap}
+.app-alert-actions{display:flex;justify-content:flex-end}
+.app-alert button{min-width:80px}
+</style>
 
 <link rel="manifest" href="./manifest.webmanifest">
 <meta name="theme-color" content="#176b45">
@@ -71,8 +80,13 @@
 <div id="printArea" class="hidden"></div>
 </main><div class="foot no-print">AKS Joinery • Cloud sync requires internet • Export backups regularly</div>
 </div>
+<dialog id="appAlert" class="app-alert" aria-labelledby="appAlertTitle" aria-describedby="appAlertMessage"><div class="app-alert-box"><h2 id="appAlertTitle">AKS Joinery</h2><p id="appAlertMessage"></p><form method="dialog" class="app-alert-actions"><button id="appAlertOk" type="submit" autofocus>OK</button></form></div></dialog>
 <script>
 const KEY='aks_joinery_prototype_v1';
+const aksAlert=document.getElementById('appAlert'),aksAlertMessage=document.getElementById('appAlertMessage');let aksAlertQueue=[];
+function showNextAksAlert(){if(!aksAlertQueue.length||!aksAlert||aksAlert.open)return;aksAlertMessage.textContent=aksAlertQueue.shift();aksAlert.showModal();document.getElementById('appAlertOk').focus()}
+aksAlert?.addEventListener('close',showNextAksAlert);
+window.alert=function(message=''){if(!aksAlert){console.info('AKS Joinery:',message);return}aksAlertQueue.push(String(message));showNextAksAlert()};
 const stages=['Roof','1st fix','2nd fix','Finials'];
 const checklist={
 'Roof':['Constructed as per drawing.','Straps fully nailed.','Trusses are plumb.','All braces are fixed as per manufacturer instructions.','All timbers are defect free.','Spandrel panels are fire quilted and boarded on party walls.','Fascia’s and barges fixed correctly.'],

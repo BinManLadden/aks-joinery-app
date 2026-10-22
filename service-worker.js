@@ -1,4 +1,4 @@
-const CACHE_NAME = "aks-joinery-cloud-sync-v3";
+const CACHE_NAME = "aks-joinery-cloud-sync-v4";
 const APP_SHELL = ["./", "./index.html", "./sync.js", "./manifest.webmanifest", "./icons/aks-icon.svg", "./icons/vistry-group.svg"];
 
 self.addEventListener("install", (event) => {
